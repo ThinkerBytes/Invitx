@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Invitx - Home</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Firebase JS SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+</head>
+<body>
+    <!-- Navbar with conditional links based on authentication status -->
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #007BFF;">
+        <a class="navbar-brand text-white" href="#">Invitx</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#find-profile-modal" data-toggle="modal">Find a Profile</a>
+                </li>
+                
+                <!-- Conditional links based on user authentication -->
+                <li class="nav-item" id="sign-in-link" style="display: none;">
+                    <a class="nav-link text-white" href="signin.html">Sign In</a>
+                </li>
+                <li class="nav-item" id="sign-up-link" style="display: none;">
+                    <a class="nav-link text-white" href="signup.html">Sign Up</a>
+                </li>
+                <li class="nav-item" id="logout-link" style="display: none;">
+                    <a class="nav-link text-white" href="#" id="logout-button">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main content -->
+    <div class="container my-5">
+        <div class="row">
+            <!-- Card for finding Invitx profiles -->
+            <div class="col-md-6">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Find Invitx Profile</h5>
+                        <p class="card-text">Locate a specific Invitx profile by entering the username.</p>
+                        <!-- Button to open the Find Invitx Profile modal -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#find-profile-modal">
+                            Find Profile
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Card for viewing own profile -->
+            <div class="col-md-6" id="profileview" style="display: none;">
+                <div class="card text-center mt-4">
+                    <div class="card-body">
+                        <h5 class="card-title">View Your Profile</h5>
+                        <p class="card-text">Check out your own Invitx profile.</p>
+                        <!-- Button to view your profile -->
+                        <button class="btn btn-success" id="view-profile-button">View Profile</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+            <!-- Card for creating or editing Invitx profiles -->
+            <div class="col-md-6">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Create Invitx Profile</h5>
+                        <p class="card-text">Set up or edit your Invitx profile with your contact details, social media, and more.</p>
+                        <!-- Button to create or edit a profile -->
+                        <a href="#" class="btn btn-secondary" id="profile-button">Create Profile</a>
+                    </div>
+                </div>
+            </div>
+
+            
+
+    <!-- Bootstrap Modal for finding a profile -->
+    <div class="modal fade" id="find-profile-modal" tabindex="-1" aria-labelledby="find-profile-modal-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="find-profile-modal-label">Find Invitx Profile</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Form to navigate to user profile by username -->
+                    <form id="go-to-profile-form">
+                        <input type="text" name="username" id="username-input" placeholder="Enter username" class="form-control" required />
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <!-- Button to navigate to the profile -->
+                    <button type="button" class="btn btn-primary" id="find-profile-button">Go to Profile</button>
+                    <!-- Button to close the modal -->
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center py-4">
+        <p>Contact Us | Terms of Service | Privacy Policy</p>
+    </footer>
+
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Custom JavaScript for Firebase and form handling -->
+    <script src="../js/index.js"></script>
+    
+</body>
+</html>

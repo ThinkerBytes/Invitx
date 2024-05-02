@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Invitx Profile</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Open Graph (OG) meta tags for social media sharing -->
+    <meta property="og:title" content="" id="og-title">
+    <meta property="og:description" content="" id="og-description">
+    <meta property="og:image" content="" id="og-image">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Firebase JS SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+</head>
+<body>
+    <!-- Add a navigation bar if needed -->
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #007BFF;">
+        <a class="navbar-brand text-white" href="index.html">Invitx</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="index.html#find-profile-modal" >Find a Profile</a>
+                </li>
+                <li class="nav-item" >
+                    <a class="nav-link text-white" href="index.html">Create a Profile</a>
+                </li>
+                
+                <!-- Conditional links based on user authentication -->
+                <li class="nav-item" id="sign-in-link" >
+                    <a class="nav-link text-white" href="signin.html">Sign In</a>
+                </li>
+                <li class="nav-item" id="sign-up-link" style="display: none;">
+                    <a class="nav-link text-white" href="signup.html">Sign Up</a>
+                </li>
+                <li class="nav-item" id="logout-link" style="display: none;">
+                    <a class="nav-link text-white" href="#" id="logout-button">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container my-5">
+        <!-- Loading and error message placeholders -->
+        <div id="loading-text" class="text-center text-primary" style="display: none;">Loading profile, please wait...</div>
+        <div id="error-text" class="text-center text-danger" style="display: none;">User not found.</div>
+
+        <div class="d-flex justify-content-center mb-2">
+            <button class="btn btn-outline-success mr-2" id="create-profile-button">
+                <i class="fas fa-user-plus"></i> Create Your Profile
+            </button>
+            <button class="btn btn-outline-primary" id="share-button" style="display: none;">
+                <i class="fas fa-share-alt"></i> Share Profile
+            </button>
+        </div>
+
+        <!-- Profile card -->
+        <div class="card border rounded shadow bg-white mx-auto" style="max-width: 500px;" id="profile-card">
+            <div class="card-body">
+                <!-- Profile picture -->
+                <div class="text-center">
+                    <img src="https://via.placeholder.com/150" alt="Profile Picture" class="rounded-circle mb-3" id="profile-picture" style="width: 150px; height: 150px;">
+                </div>
+                
+                <!-- Name and designation -->
+                <h2 class="text-primary text-center" id="full-name"></h2>
+                <h4 class="text-secondary text-center" id="profession"></h4>
+                
+                <!-- Horizontal line -->
+                <hr>
+
+                <!-- About section -->
+                <div class="mt-4 text-center" id="about-section" style="display: none;">
+                    <h5 class="text-primary">About</h5>
+                    <p id="about"></p>
+                </div>
+
+                <!-- Contact details and other information -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12" id="contact-details">
+                            <hr>
+                            <p id="education-section" style="display: none;"><i class="fas fa-graduation-cap text-secondary"></i> <strong>Education:</strong> <span id="education"></span></p>
+                            <hr>
+                            
+                            <!-- Adding phone number section with a 'tel:' link to make it callable -->
+                            <p id="phone-section" style="display: none;"><i class="fas fa-phone text-primary"></i> <strong>Phone:</strong> <a href="" id="phone-no" target="_blank"></a></p>
+                            <hr>
+                            <p id="email-section" style="display: none;"><i class="fas fa-envelope text-info"></i> <strong>Email:</strong> <a href="" id="email" target="_blank"></a></p>
+                            <hr>
+                            <p id="whatsapp-section" style="display: none;"><i class="fas fa-phone text-success"></i> <strong>WhatsApp:</strong> <a href="" id="whatsapp-no" target="_blank"></a></p>
+                            <hr>
+                            <p id="instagram-section" style="display: none;"><i class="fab fa-instagram text-danger"></i> <strong>Instagram:</strong> <a href="" id="instagram-id" target="_blank"></a></p>
+                            <hr>
+                            <p id="facebook-section" style="display: none;"><i class="fab fa-facebook text-primary"></i> <strong>Facebook:</strong> <a href="" id="facebook-id" target="_blank"></a></p>
+                            <hr>
+                            <p id="twitter-section" style="display: none;"><i class="fab fa-twitter text-primary"></i> <strong>Twitter:</strong> <a href="" id="twitter-id" target="_blank"></a></p>
+                            <hr>
+                            <p id="location-section" style="display: none;"><i class="fas fa-map-marker-alt text-warning"></i> <strong>Location:</strong> <span id="location"></span></p>
+                            <hr>
+                            <p id="google-location-section" style="display: none;"><i class="fas fa-directions text-info"></i> <strong>Directions:</strong> <a href="" id="google-location" target="_blank">Get Directions</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center py-4">
+        <p>Contact Us | Terms of Service | Privacy Policy</p>
+    </footer>
+
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Custom JavaScript for Firebase and form handling -->
+    <script src="../js/profile.js"></script>
+    
+</body>
+</html>
